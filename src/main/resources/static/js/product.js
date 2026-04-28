@@ -3,10 +3,39 @@ window.onload = function () {
     loadProducts();
     insertProduct();
     deletehandeler();
-
+    updateProduct();
 }
 
-function deletehandeler(){
+function updateProduct(){
+    const updateBtn = document.querySelector("#updateBtn")
+    const selectEl = document.querySelector("select[name='p_no']")
+    const nameEl = document.querySelector("#up-name")
+    const priceEl = document.querySelector("#up-price")
+
+    updateBtn.addEventListener("click", ()=>{
+
+        const obj = {
+            p_no : selectEl.value,
+            p_name : nameEl.value,
+            p_price : priceEl.value
+        }
+
+        fetch("/api/product", {
+            method : "PUT",
+            headers : {
+                "Content-Type" : "application/json"
+            },
+            body : JSON.stringify(obj)
+        })
+        .then(res => res.text())
+        .then(result => {
+            console.log(result)
+            loadProducts()
+        })
+    });
+}
+
+function deletehandeler() {
     const delBtn = document.querySelector("#delBtn");
     delBtn.addEventListener("click", () => {
         const pk = document.querySelector("input[name='pk']");
@@ -48,7 +77,18 @@ function loadProducts() {
                     deleteProduct(product.p_no);
                 })
             })
+            modal();
 
+            //option
+            const noEl = document.querySelectorAll(".no");
+            const selectEl = document.querySelector("select[name='p_no']");
+
+            let optionEl;
+            noEl.forEach(noDiv => {
+                let no = noDiv.innerText;
+                optionEl += `<option value="${no}">no. ${no}</option>`;
+            })
+            selectEl.innerHTML = optionEl;
         }).catch(err => {
         console.log(err);
     })
@@ -102,14 +142,30 @@ function insertProduct() {
 
 }
 
-function modal(){
-     const openModalBtn = document.getElementById("openModal");
-     const clostModalBtn = document.getElementById("closeModal");
-     const myModal = document.getElementById("myModal");
+function modal() {
+    const openModalBtn = document.getElementById("openModal");
+    const clostModalBtn = document.getElementById("closeModal");
+    const myModal = document.getElementById("myModal");
 
-     openModalBtn.addEventListener("click", () => {
-         myModal.showModal();
-     })
+    const openModalNo = document.querySelectorAll(".no");
+    const openModalName = document.querySelector(".name");
+    const openModalPrice = document.querySelector(".price");
+    console.log(openModalNo, openModalName, openModalPrice);
+
+    openModalNo.forEach(noEl => {
+        noEl.addEventListener("click", (e) => {
+            myModal.showModal();
+            console.log(e.target.dataset);
+            console.log(e.target.dataset.no);
+            console.log(e.target.dataset.name);
+            console.log(e.target.dataset.price);
+        })
+
+    })
+
+    openModalBtn.addEventListener("click", () => {
+        myModal.showModal();
+    })
 
     clostModalBtn.addEventListener("click", () => {
         myModal.close();

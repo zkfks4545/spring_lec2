@@ -34,4 +34,9 @@ public class ProductAPIC {
         return productService.deleteProduct(id);
     }
 
+    @PutMapping
+    public String updateProduct(@RequestBody ProductVO product) {
+        return productService.updateProduct(product);
+    }
+
 }
