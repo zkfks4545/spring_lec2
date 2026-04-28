@@ -22,9 +22,9 @@ public class ProductService {
 
     public int deleteProduct(int pk) {
 
-        if (productMapper.deleteProduct(pk) == 1){
+        if (productMapper.deleteProduct(pk) == 1) {
             System.out.println("delete success");
-        }else {
+        } else {
             System.out.println("delete fail");
         }
 
@@ -33,16 +33,21 @@ public class ProductService {
 
     public int createProduct(ProductVO product) {
         int row = productMapper.inertProduct(product);
-         if (row == 1){
-             System.out.println("create success");
-         }
+        if (row == 1) {
+            System.out.println("create success");
+        }
         return row;
     }
 
 
-    public void updateProduct(ProductVO product) {
-        if(productMapper.updateProduct(product) == 1){
+    public String updateProduct(ProductVO product) {
+        int row = productMapper.updateProduct(product);
+        if (row == 1) {
             System.out.println("update success");
+            return "success";
+        } else {
+            System.out.println("update fail");
+            return  "fail";
         }
     }
 

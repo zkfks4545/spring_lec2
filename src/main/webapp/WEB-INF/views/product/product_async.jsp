@@ -12,35 +12,29 @@
 <body>
 
 <h1>- product reg -</h1>
+<div>
+    <div>name <input type="text" id="name" name="p_name"></div>
+    <div>price <input type="text" id="price" name="p_price"></div>
     <div>
-        <div>name <input type="text" id="name" name="p_name"></div>
-        <div>price <input type="text" id="price" name="p_price"></div>
-        <div>
-            <button id="add">add</button>
-        </div>
+        <button id="add">add</button>
     </div>
+</div>
 
 <h1>- product update -</h1>
-<form action="/product/update" method="post">
     <div>
         <div>
-            <select name="p_no">
-                <c:forEach items="${products}" var="p">
-                    <option value="${p.p_no}">no. ${p.p_no}</option>
-                </c:forEach>
-            </select>
+            <select name="p_no"></select>
         </div>
-        <div><input type="text" placeholder="name" name="p_name"></div>
-        <div><input type="text" placeholder="price" name="p_price"></div>
+        <div><input type="text" id="up-name" placeholder="name" name="p_name"></div>
+        <div><input type="text" id="up-price" placeholder="price" name="p_price"></div>
         <div>
-            <button>update</button>
+            <button id="updateBtn">update</button>
         </div>
     </div>
-</form>
 <hr>
 <h1>- product delete -</h1>
-    <input type="text" name="pk">
-    <button id="delBtn">delete</button>
+<input type="text" name="pk">
+<button id="delBtn">delete</button>
 <hr>
 
 <hr>
@@ -60,22 +54,21 @@
     </div>
 </div>
 
-<div id="product-list">
+<div id="product-list"></div>
 
-    <button id="openModal">Open Modal</button>
+<button id="openModal">Open Modal</button>
 
 
-    <dialog id="myModal">
-        <h2>Product Modal</h2>
-        <div>
-            <div class="modal-no"></div>
-            <div class="modal-name"></div>
-            <div class="modal-price"></div>
-        </div>
-        <button id="closeModal">Close</button>
-    </dialog>
+<dialog id="myModal">
+    <h2>Product Modal</h2>
+    <div>
+        <div class="modal-no"></div>
+        <div class="modal-name"></div>
+        <div class="modal-price"></div>
+    </div>
+    <button id="closeModal">Close</button>
+</dialog>
 
-</div>
 
 </body>
 </html>
