@@ -28,3 +28,23 @@ insert into review_test2
 values (review_test2_seq.nextval, 'test1', 'test1', sysdate);
 
 select * from review_test2;
+
+create table file_test
+(
+    f_no    number(2) primary key,
+    f_title varchar2(50 char) not null,
+    f_name  varchar2(50 char) not null
+);
+create sequence file_test_seq;
+
+insert into file_test
+values (file_test_seq.nextval, 'test', 'a.jpg');
+
+select * from file_test;
+
+create table file_test2
+(
+    f_details varchar2(1000 char) not null
+);
+
+select * from file_test2;
